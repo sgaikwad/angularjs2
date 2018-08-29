@@ -1,0 +1,32 @@
+<div>
+  <employee-count [all]="getTotalEmployeeCount()"
+                  [male]="getTotalMaleEmployeeCount()"
+                  [female]="getTotalFeMaleEmployeeCount()"></employee-count>
+<br/>
+<br/>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Salary</th>
+        <th scope="col">DateOfBirth</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees;">
+        <td>{{emp.code | uppercase}}</td>
+        <td>{{ emp.firstName | employeeTitle: emp.gender}}</td>
+        <td>{{emp.gender }}</td>
+        <td>{{emp.annualSalary | currency:'USD':true:'1.3-3'}}</td>
+        <td>{{emp.dateOfBirth | date:'dd/MM/y'| uppercase}}</td>
+      </tr>
+      <tr *ngIf="employees==null || employees.length==0">
+        <td>No Employees to display</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <br/>
+  <button (click)="getEmployees()">Refresh</button> -->
+</div>
