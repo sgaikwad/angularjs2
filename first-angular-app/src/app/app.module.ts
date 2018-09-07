@@ -7,6 +7,8 @@ import { EmployeeComponent } from './employee/employee.component';
 import { EmployeelistComponent } from './employeelist/employeelist.component';
 import { EmployeeTitle } from './shared/employeeTitle.pipe';
 import { EmployeeCountComponent } from './employeelist/employee-count/employee-count.component';
+import { EmployeeService } from './shared/employee.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,9 @@ import { EmployeeCountComponent } from './employeelist/employee-count/employee-c
   
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,HttpClientModule
   ],
-  providers: [],
+  providers:[EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

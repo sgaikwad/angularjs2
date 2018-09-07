@@ -7,6 +7,11 @@ import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
 })
 export class EmployeeCountComponent implements OnInit {
 
+  selectedRadioButtonValue:string='All';
+
+@Output()
+countRadioButtonSelectionChanged:EventEmitter<string> = new EventEmitter<string>();
+
 @Input()
 all:number;
 
@@ -16,10 +21,14 @@ male:number;
 @Input()
 female:number; 
 
+onRadionButtonSelectionChange(){
+  this.countRadioButtonSelectionChanged.emit(this.selectedRadioButtonValue);
+  console.log(this.selectedRadioButtonValue);
+}
 
-  constructor() { }
+constructor() { }
 
   ngOnInit() {
+  console.log(this.selectedRadioButtonValue);
   }
-
 }
