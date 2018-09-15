@@ -11,14 +11,10 @@ export class EmployeeComponent implements OnInit {
   lastName: string = "Hoplins";
   gender: string = "Male";
   age: number = 20;
-  showDetails:boolean = false;
   constructor() { }
 
   ngOnInit() {
   }
-
-
   toggleDetails():void{
-    this.showDetails  = !this.showDetails;
   }
 }

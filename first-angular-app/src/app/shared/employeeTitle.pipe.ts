@@ -6,8 +6,8 @@ import { PipeTransform, Pipe } from "../../../node_modules/@angular/core";
 })
 
 export class EmployeeTitle implements PipeTransform {
-    transform(employeeName: string, gender: string): string {
-        if (gender.toLowerCase() == 'male') {
+    transform(employeeName: string, Gender: string): string {
+        if (Gender.toLowerCase() == 'male') {
             return 'Mr.' + employeeName;
         }
         else {

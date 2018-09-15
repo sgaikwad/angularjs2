@@ -11,6 +11,8 @@ import { EmployeeService } from '../shared/employee.service';
 export class EmployeelistComponent implements OnInit {
 
   employees: IEmployee[];
+  employee: any;
+  statusMessage:string='Loading data.Please wait..!!';
 
 selectedEmployeeCountRadioButton:string="All";
 
@@ -19,24 +21,37 @@ selectedEmployeeCountRadioButton:string="All";
   }
 
   ngOnInit() {
-    this.employees = this.employeeService.getEmployees();
+    this.employeeService.getEmployees()
+    .subscribe(employeeData=>this.employees = employeeData,
+    error=>this.statusMessage="Problem with service, please try after sometime.");
   }
 
 
 getTotalEmployeeCount():number{
-  return  this.employeeService.getEmployees().length;
+  return  this.employees.length;
 }
+
 
 getTotalMaleEmployeeCount():number{
-  return this.employeeService.getEmployees().filter(e=>e.gender==="Male").length;
-}
+  return this.employees.filter(e=>e.Gender==="Male").length;
+} 
+
 
 getTotalFeMaleEmployeeCount():number{
-  return this.employeeService.getEmployees().filter(e=>e.gender==="Female").length;
+  return this.employees.filter(e=>e.Gender==="Female").length;
 }
+
 
 onSelectedEmployeeRadioButtonChange(selectedRadioButtonValue:string):void{
   this.selectedEmployeeCountRadioButton = selectedRadioButtonValue;
+}
+
+getEmployeeById():any{
+ this.employeeService.getEmployeeById("emp001").subscribe(employeeData=>this.employee == employeeData);
+
+console.log(this.employee);
+
+ return this.employee;
 }
 
 }

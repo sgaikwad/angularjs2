@@ -1,5 +1,5 @@
 <div>
-  <employee-count [all]="getTotalEmployeeCount()"
+  <employee-count *ngIf="employees" [all]="getTotalEmployeeCount()"
                   [male]="getTotalMaleEmployeeCount()"
                   [female]="getTotalFeMaleEmployeeCount()"
                   (countRadioButtonSelectionChanged)="onSelectedEmployeeRadioButtonChange($event)"></employee-count>
@@ -17,19 +17,26 @@
     </thead>
     <tbody>
       <ng-container *ngFor="let emp of employees;">
-      <tr *ngIf="selectedEmployeeCountRadioButton=='All' || selectedEmployeeCountRadioButton == emp.gender" >
-        <td>{{emp.code | uppercase}}</td>
-        <td>{{ emp.firstName | employeeTitle: emp.gender}}</td>
-        <td>{{emp.gender }}</td>
-        <td>{{emp.annualSalary | currency:'USD':true:'1.3-3'}}</td>
-        <td>{{emp.dateOfBirth | date:'dd/MM/y'| uppercase}}</td>
+      <tr *ngIf="selectedEmployeeCountRadioButton=='All' || selectedEmployeeCountRadioButton == emp.Gender" >
+        <td>{{emp.Code | uppercase}}</td>
+        <td>{{ emp.FirstName | employeeTitle: emp.Gender}}</td>
+        <td>{{emp.Gender }}</td>
+        <td>{{emp.AnnualSalary | currency:'USD':true:'1.3-3'}}</td>
+        <td>{{emp.DateOfBirth | date:'dd/MM/y'| uppercase}}</td>
       </tr>
     </ng-container>
-      <tr *ngIf="employees==null || employees.length==0">
-        <td>No Employees to display</td>
-      </tr>
+    <tr *ngIf="!employees">
+      <td colspan="5">
+        {{statusMessage}}
+      </td>
+    </tr>
+    <tr *ngIf="employees && employees.lenght==0">
+      <td colspan="5">
+        No data to display..!!!
+      </td>
+    </tr>
     </tbody>
   </table>
   <!-- <br/>
-  <button (click)="getEmployees()">Refresh</button> -->
+  <button (click)="getEmployeeById()">Refresh</button> -->
 </div>

@@ -1,12 +1,12 @@
-import { IEmployee } from "./IEmployee";
+// import { IEmployee } from "./IEmployee";
 
-export class Employee implements IEmployee{
+// export class Employee implements IEmployee{
 
-    computeMonthlySalary(annualSalary: number): number {
-        return annualSalary/12;
-    }
+//     computeMonthlySalary(AnnualSalary: number): number {
+//         return AnnualSalary/12;
+//     }
 
-    constructor(public code: string, public firstName: string,public gender: string,public annualSalary: number,public dateOfBirth: string){
+//     constructor(public Code: string, public FirstName: string,public Gender: string,public AnnualSalary: number,public DateOfBirth: string){
 
-    }
-}
+//     }
+// }

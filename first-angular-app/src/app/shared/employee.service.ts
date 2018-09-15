@@ -1,29 +1,35 @@
 import { Injectable } from "@angular/core";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {Http,Response} from '@angular/http';
 import { IEmployee } from "./IEmployee";
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class EmployeeService{
 
     serviceUrl:string="http://localhost:53415/api/employee";
-    constructor(private _httpClient:HttpClient){
+    constructor(private _httpClient:Http){
 
     }
 
-    getEmployees():IEmployee[]{
+    getEmployees():Observable<IEmployee[]>{
 
- //return this._httpClient.get(this.serviceUrl);
-
-        return [
-            { code: 'emp001', firstName: 'Tom', gender: 'Male', annualSalary: 5500,dateOfBirth:'06/25/2012' },
-            { code: 'emp002', firstName: 'Alex', gender: 'Male', annualSalary: 10000 ,dateOfBirth:'12/2/2012'},
-            { code: 'emp003', firstName: 'Marry', gender: 'Female', annualSalary: 20000,dateOfBirth:'11/30/2012' },
-            { code: 'emp004', firstName: 'Mike', gender: 'Male', annualSalary: 5500,dateOfBirth:'10/14/2012' },
-            { code: 'emp005', firstName: 'Nancy', gender: 'Female', annualSalary: 6000,dateOfBirth:'02/02/2012' },
-            { code: 'emp006', firstName: 'Steve', gender: 'Male', annualSalary: 6000,dateOfBirth:'02/02/2012' }
-          ];
-          
+ return this._httpClient.get(this.serviceUrl)
+ .map((response:Response)=><IEmployee[]>response.json())
+ .catch(this.handleError);
     }
 
+    getEmployeeById(code:string):Observable<any>{
+        var url = this.serviceUrl+"/"+code;
+        return this._httpClient.get(url).map((response:Response)=>response.json() as any);
+        
+    }
+    handleError(error:Response){
+        console.log(error);
+        return Observable.throw(error);
+    }
 }
+
+          

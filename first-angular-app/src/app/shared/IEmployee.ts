@@ -2,11 +2,11 @@
 
 
 export interface IEmployee{
-    code:string;
-    firstName:string;
-    gender:string;
-    annualSalary:number;
-    dateOfBirth:string;
-
+    Code:string;
+    FirstName:string;
+    Gender:string;
+    AnnualSalary:number;
+    DateOfBirth:string;
     //computeMonthlySalary(annualSalary:number):number;
 }
+

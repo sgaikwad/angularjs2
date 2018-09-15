@@ -27,7 +27,6 @@ onRadionButtonSelectionChange(){
 }
 
 constructor() { }
-
   ngOnInit() {
   console.log(this.selectedRadioButtonValue);
   }
